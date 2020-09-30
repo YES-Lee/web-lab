@@ -8,10 +8,12 @@ export default {
       control: {
         type: 'inline-radio',
         options: ['lift', 'sink']
-      }
+      },
+      defaultValue: 'lift'
     },
     hideShadow: {
-      control: 'boolean'
+      control: 'boolean',
+      defaultValue: false
     },
     shadowColor: {
       control: 'color'
@@ -19,32 +21,26 @@ export default {
   }
 }
 
-export const SlopingEffectLift = (args, { argTypes }) => ({
+const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { Sloping },
-  template: '<sloping></sloping>'
+  template: '<sloping :type="type" :hideShadow="hideShadow"></sloping>'
 })
+
+export const SlopingEffectLift = Template.bind()
 SlopingEffectLift.args = {
   type: 'lift'
 }
 SlopingEffectLift.storyName = '上浮'
 
-export const SlopingEffectSink = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { Sloping },
-  template: '<sloping></sloping>'
-})
+export const SlopingEffectSink = Template.bind()
 SlopingEffectSink.args = {
   type: 'sink'
 }
 SlopingEffectSink.storyName = '下沉'
 
-export const SlopingEffectShadow = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { Sloping },
-  template: '<sloping></sloping>'
-})
-SlopingEffectSink.args = {
+export const SlopingEffectShadow = Template.bind()
+SlopingEffectShadow.args = {
   hideShadow: true
 }
 SlopingEffectShadow.storyName = '隐藏阴影'
