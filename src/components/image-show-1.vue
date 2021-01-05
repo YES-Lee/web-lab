@@ -49,7 +49,6 @@ export default {
   position: 0;
   background-size: cover;
   filter: blur(10px);
-  z-index: -1;
 }
 .image {
   display: block;
@@ -57,5 +56,6 @@ export default {
   height: 256px;
   object-fit: contain;
   position: relative;
+  z-index: 1;
 }
 </style>
