@@ -1,12 +1,14 @@
 <template>
-  <div class="taiji-container">
-    <div class="white-container" :style="{ animationDuration: `${duration}s` }">
-      <div class="head"></div>
-      <div class="tail"></div>
-    </div>
-    <div class="black-container" :style="{ animationDuration: `${duration}s` }">
-      <div class="tail"></div>
-      <div class="head"></div>
+  <div class="background">
+    <div class="taiji-container">
+      <div class="white-container" :style="{ animationDuration: `${duration}s` }">
+        <div class="head"></div>
+        <div class="tail"></div>
+      </div>
+      <div class="black-container" :style="{ animationDuration: `${duration}s` }">
+        <div class="tail"></div>
+        <div class="head"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -26,6 +28,9 @@ export default {
 body {
   padding: 0;
   margin: 0;
+  background-color: #efefef;
+}
+.background {
   background-color: #efefef;
 }
 .taiji-container {
