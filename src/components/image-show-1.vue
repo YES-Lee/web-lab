@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .button {
   margin-top: 20px;
 }
