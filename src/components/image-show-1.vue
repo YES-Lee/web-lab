@@ -34,6 +34,8 @@ export default {
   width: fit-content;
   position: relative;
   overflow: hidden;
+  border-radius: 2px;
+  border: 6px solid #efefef;
 }
 .container::after {
   display: block;
@@ -51,8 +53,8 @@ export default {
 }
 .image {
   display: block;
-  width: 108px;
-  height: 108px;
+  width: 256px;
+  height: 256px;
   object-fit: contain;
   position: relative;
 }
