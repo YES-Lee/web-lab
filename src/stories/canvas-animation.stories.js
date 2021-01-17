@@ -2,7 +2,7 @@ import { LabConfig } from '../config'
 import FreeFall from '../components/free-fall.vue'
 
 export default {
-  title: `${LabConfig.name}/canvas动画`,
+  title: `${LabConfig.name}/Canvas动画`,
   subcomponents: {
     FreeFall
   }

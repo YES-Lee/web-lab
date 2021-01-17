@@ -2,7 +2,7 @@ import ImageShow1 from '../components/image-show-1.vue'
 import { LabConfig } from '../config'
 
 export default {
-  title: `${LabConfig.name}/图片显示`,
+  title: `${LabConfig.name}/图片展示效果`,
   component: ImageShow1
 }
 
@@ -12,5 +12,5 @@ const Template = (args, { argTypes }) => ({
   template: '<image-show-1 />'
 })
 
-export const Effect1 = Template.bind()
-Effect1.storyName = '效果1'
+export const ImageShow = Template.bind()
+ImageShow.storyName = '图片展示效果'

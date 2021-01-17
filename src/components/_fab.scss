@@ -1,0 +1,256 @@
+$fab-size: 54px;
+$fab-menu-size: 42px;
+$fab-menu-offset: 140%;
+
+@mixin initial-position($pos) {
+  @if $pos == 'left' {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  } @else if $pos == 'left-top' {
+    left: 0;
+    top: 0;
+  } @else if $pos == 'top' {
+    left: 0;
+    top: 0;
+    right: 0;
+    margin: auto;
+  } @else if $pos == 'right-top' {
+    top: 0;
+    right: 0;
+  } @else if $pos == 'right' {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  } @else if $pos == 'right-bottom' {
+    right: 0;
+    bottom: 0;
+  } @else if $pos == 'bottom' {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  } @else if $pos == 'left-bottom' {
+    left: 0;
+    bottom: 0;
+  } @else {
+    @error '位置类型#{$pos}不存在！';
+  }
+}
+
+@mixin position-at($idx, $pos) {
+  &:nth-child(#{$idx}) {
+    @include initial-position($pos);
+  }
+}
+
+@mixin transform-at($idx, $pos, $level: 1) {
+  $offset-1: $level * $fab-menu-offset; // 垂直方向长度
+  $offset-2: 0.707 * $level * $fab-menu-offset; // 45度方向
+  @content;
+  @if $pos == 'left' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d(- $offset-1, 0, 0) scale(1);
+    }
+  } @else if $pos == 'left-top' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d(- $offset-2, - $offset-2, 0) scale(1);
+    }
+  } @else if $pos == 'top' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d(0, - $offset-1, 0) scale(1);
+    }
+  } @else if $pos == 'right-top' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d($offset-2, - $offset-2, 0) scale(1);
+    }
+  } @else if $pos == 'right' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d($offset-1, 0, 0) scale(1);
+    }
+  } @else if $pos == 'right-bottom' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d($offset-2, $offset-2, 0) scale(1);
+    }
+  } @else if $pos == 'bottom' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d(0, $offset-1, 0) scale(1);
+    }
+  } @else if $pos == 'left-bottom' {
+    &:nth-child(#{$idx}) {
+      transform: translate3d(- $offset-2, $offset-2, 0) scale(1);
+    }
+  } @else {
+    @error '位置类型#{$pos}不存在！';
+  }
+}
+
+@mixin transition-delay($step: 0) {
+  @for $idx from 1 to 6 {
+    &:nth-child(#{$idx}) {
+      transition-delay: ($idx - 1) * $step;
+    }
+  }
+}
+
+@mixin fab-bottom() {
+  .fab_menu {
+    @include position-at(1, 'left');
+    @include position-at(2, 'left-top');
+    @include position-at(3, 'top');
+    @include position-at(4, 'right-top');
+    @include position-at(5, 'right');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'left');
+      @include transform-at(2, 'left-top');
+      @include transform-at(3, 'top');
+      @include transform-at(4, 'right-top');
+      @include transform-at(5, 'right');
+    }
+  }
+}
+
+@mixin fab-top() {
+  .fab_menu {
+    @include position-at(1, 'left');
+    @include position-at(2, 'left-bottom');
+    @include position-at(3, 'bottom');
+    @include position-at(4, 'right-bottom');
+    @include position-at(5, 'right');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'left');
+      @include transform-at(2, 'left-bottom');
+      @include transform-at(3, 'bottom');
+      @include transform-at(4, 'right-bottom');
+      @include transform-at(5, 'right');
+    }
+  }
+}
+
+@mixin fab-left() {
+  .fab_menu {
+    @include position-at(1, 'top');
+    @include position-at(2, 'right-top');
+    @include position-at(3, 'right');
+    @include position-at(4, 'right-bottom');
+    @include position-at(5, 'bottom');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'top');
+      @include transform-at(2, 'right-top');
+      @include transform-at(3, 'right');
+      @include transform-at(4, 'right-bottom');
+      @include transform-at(5, 'bottom');
+    }
+  }
+}
+
+@mixin fab-right() {
+  .fab_menu {
+    @include position-at(1, 'bottom');
+    @include position-at(2, 'left-bottom');
+    @include position-at(3, 'left');
+    @include position-at(4, 'left-top');
+    @include position-at(5, 'top');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'bottom');
+      @include transform-at(2, 'left-bottom');
+      @include transform-at(3, 'left');
+      @include transform-at(4, 'left-top');
+      @include transform-at(5, 'top');
+    }
+  }
+}
+
+@mixin fab-left-top() {
+  .fab_menu {
+    @include position-at(1, 'right');
+    @include position-at(2, 'right-bottom');
+    @include position-at(3, 'bottom');
+    @include position-at(4, 'right');
+    @include position-at(5, 'bottom');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'right');
+      @include transform-at(2, 'right-bottom');
+      @include transform-at(3, 'bottom');
+      @include transform-at(4, 'right', 2);
+      @include transform-at(5, 'bottom', 2);
+    }
+  }
+}
+
+@mixin fab-right-top() {
+  .fab_menu {
+    @include position-at(1, 'left');
+    @include position-at(2, 'left-bottom');
+    @include position-at(3, 'bottom');
+    @include position-at(4, 'left');
+    @include position-at(5, 'bottom');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'left');
+      @include transform-at(2, 'left-bottom');
+      @include transform-at(3, 'bottom');
+      @include transform-at(4, 'left', 2);
+      @include transform-at(5, 'bottom', 2);
+    }
+  }
+}
+
+@mixin fab-left-bottom() {
+  .fab_menu {
+    @include position-at(1, 'top');
+    @include position-at(2, 'right-top');
+    @include position-at(3, 'right');
+    @include position-at(4, 'top');
+    @include position-at(5, 'right');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'top');
+      @include transform-at(2, 'right-top');
+      @include transform-at(3, 'right');
+      @include transform-at(4, 'top', 2);
+      @include transform-at(5, 'right', 2);
+    }
+  }
+}
+
+@mixin fab-right-bottom() {
+  .fab_menu {
+    @include position-at(1, 'top');
+    @include position-at(2, 'left-top');
+    @include position-at(3, 'left');
+    @include position-at(4, 'top');
+    @include position-at(5, 'left');
+    @include transition-delay(25ms);
+  }
+  &.show_menu {
+    .fab_menu {
+      @include transform-at(1, 'top');
+      @include transform-at(2, 'left-top');
+      @include transform-at(3, 'left');
+      @include transform-at(4, 'top', 2);
+      @include transform-at(5, 'left', 2);
+    }
+  }
+}
